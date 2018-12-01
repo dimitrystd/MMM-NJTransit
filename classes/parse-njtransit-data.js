@@ -1,6 +1,10 @@
+/* A MagicMirror module to show bus, luas and rail arrival times.
+ * Copyright (C) 2018 Dmitry Studynskyi
+ * License: GNU General Public License */
+
 const xml2js = require("xml2js");
 const util = require("util");
-const { ErrorEventData, BusEventData } = require("../models/evant-data");
+const { ErrorEventData, BusEventData } = require("../models/event-data");
 
 function parseBusData(preObj) {
     if (!preObj.rn) {
@@ -12,16 +16,16 @@ function parseBusData(preObj) {
     if (!preObj.pt && !preObj.pu) {
         return [new ErrorEventData("XML has no \"pr\" or \"pu\" tag (time)")];
     }
-    let dueTime;
-    if (preObj.pu === "approaching") {
-        dueTime = "Approaching";
-    } else {
-        dueTime = `${preObj.pt} ${preObj.pu}`;
+    const isDue = preObj.pu === "approaching";
+    const dueTime = isDue ? -1 : parseInt(preObj.pt, 10);
+    if (!preObj.rn) {
+        return [new ErrorEventData("XML has no \"rn\" tag (route number)")];
     }
-    return new BusEventData(preObj.rn, dueTime, preObj.scheduled === "true");
+    const destination = preObj.fd ? preObj.fd.replace(preObj.rn, "").trim() : "";
+    return new BusEventData(preObj.rn, dueTime, isDue, preObj.scheduled === "true", destination);
 }
 
-async function parseNjtData(xml) {
+const parseNjtData = async (xml) => {
     const parser = new xml2js.Parser({
         trim: true,
         explicitArray: false,
@@ -31,6 +35,7 @@ async function parseNjtData(xml) {
     });
     try {
         const xmlObj = await util.promisify(parser.parseString.bind(parser))(xml);
+        // console.info(xmlObj);
         if (!xmlObj.stop) {
             return [new ErrorEventData("XML has no \"stop\" tag")];
         }
@@ -43,17 +48,17 @@ async function parseNjtData(xml) {
         /* eslint-disable fp/no-mutating-methods */
         const events = [];
         if (xmlObj.stop.pre instanceof Array) {
-            for (let i = 0; i < xmlObj.stop.pre.length; i++) {
+            for (let i = 0; i < xmlObj.stop.pre.length; i += 1) {
                 events.push(parseBusData(xmlObj.stop.pre[i]));
             }
         } else {
             events.push(parseBusData(xmlObj.stop.pre));
         }
-        // console.info(xmlObj);
+        console.info(events);
         return events;
     } catch (e) {
         return [new ErrorEventData(`Could not parse XML from string "${xml}"`)];
     }
-}
+};
 
 module.exports = parseNjtData;

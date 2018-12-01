@@ -1,8 +1,12 @@
+/* A MagicMirror module to show bus, luas and rail arrival times.
+ * Copyright (C) 2018 Dmitry Studynskyi
+ * License: GNU General Public License */
+
 /* eslint-disable no-unused-expressions */
 const { expect } = require("chai");
 const fs = require("fs");
 const parseXml = require("../classes/parse-njtransit-data");
-const { ErrorEventData, BusEventData } = require("../models/evant-data");
+const { ErrorEventData, BusEventData } = require("../models/event-data");
 
 describe("Test parser - fail cases", () => {
     it("Non xml file", async () => {
@@ -56,8 +60,10 @@ describe("Test parser - success cases", () => {
         expect(events[0]).to.be.instanceof(BusEventData);
         expect(events[0]).to.deep.equal({
             routeId: "158",
-            due: "5 minutes",
-            scheduled: false
+            dueTime: 5,
+            isDue: false,
+            scheduled: false,
+            destination: "new york  via river road"
         });
     });
 
@@ -68,8 +74,10 @@ describe("Test parser - success cases", () => {
         expect(events[0]).to.be.instanceof(BusEventData);
         expect(events[0]).to.deep.equal({
             routeId: "27",
-            due: "Approaching",
-            scheduled: false
+            dueTime: -1,
+            isDue: true,
+            scheduled: false,
+            destination: "b bloomfield  via broad st sta"
         });
     });
 
@@ -80,8 +88,10 @@ describe("Test parser - success cases", () => {
         expect(events[0]).to.be.instanceof(BusEventData);
         expect(events[0]).to.deep.equal({
             routeId: "158",
-            due: "5 minutes",
-            scheduled: true
+            dueTime: 5,
+            isDue: false,
+            scheduled: true,
+            destination: "new york  via river road"
         });
     });
 });

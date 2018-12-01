@@ -1,0 +1,27 @@
+/* A MagicMirror module to show bus, luas and rail arrival times.
+ * Copyright (C) 2018 Dmitry Studynskyi
+ * License: GNU General Public License */
+
+.symbol {
+    padding-left: 0;
+    padding-right: 10px;
+    font-size: 80%;
+    vertical-align: top;
+}
+
+.symbol span {
+    display: inline-block;
+    -ms-transform: translate(0, 2px); /* IE 9 */
+    -webkit-transform: translate(0, 2px); /* Safari */
+    transform: translate(0, 2px);
+}
+
+.route, .stopname, .destination {
+    padding: 0px 10px;
+}
+
+.time {
+    padding-left: 30px;
+    text-align: right;
+    vertical-align: top;
+}
