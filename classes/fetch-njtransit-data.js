@@ -1,11 +1,12 @@
 /* A MagicMirror module to show bus, luas and rail arrival times.
- * Copyright (C) 2018 Dmitry Studynskyi
- * License: GNU General Public License */
+* Copyright (C) 2018 Dmitry Studynskyi
+* License: GNU General Public License */
 
+/* eslint-disable guard-for-in,no-restricted-syntax */
 /* eslint no-plusplus: ["error", { "allowForLoopAfterthoughts": true }] */
 const request = require("request-promise-native");
 const njtParser = require("./parse-njtransit-data");
-const { ErrorEventData, BusEventData } = require("../models/event-data");
+const { ErrorEventData } = require("../models/event-data");
 
 class NjtFetcher {
     constructor(stopId, fetchInterval, routes, destinations,
@@ -84,8 +85,6 @@ class NjtFetcher {
         this.reloadTimer = setTimeout(() => this.fetchStop(), this.fetchInterval);
     }
 
-    /* PUBLIC METHODS */
-
     /* trigger fetching a stop */
     startFetch() {
         this.fetchStop();
@@ -137,11 +136,11 @@ class NjtFetcher {
                     if (this.exclude(parsedEvents[i])) {
                         // console.log("excluded event:");
                         // console.log(event);
-                        continue;
+                    } else {
+                        /* eslint-disable fp/no-mutating-methods */
+                        newEvents.push(parsedEvents[i]);
+                        // console.log(e);
                     }
-                    /* eslint-disable fp/no-mutating-methods */
-                    newEvents.push(parsedEvents[i]);
-                    // console.log(e);
                 }
 
                 /* eslint-disable fp/no-mutating-methods */
@@ -150,7 +149,7 @@ class NjtFetcher {
 
                 /* limit number of events */
                 this.events = newEvents.slice(0, this.maximumEntries);
-                console.log(newEvents);
+                // console.log(newEvents);
 
                 /* notify */
                 this.broadcastEvents();

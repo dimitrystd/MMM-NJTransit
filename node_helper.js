@@ -8,7 +8,6 @@ const NjtFetcher = require("./classes/fetch-njtransit-data");
 module.exports = nodeHelper.create({
 
     start() {
-        const events = [];
         this.fetchers = [];
         console.log(`Starting node helper for: ${this.name}`);
     },
@@ -36,7 +35,6 @@ module.exports = nodeHelper.create({
      */
     createFetcher(stopId, fetchInterval, routes, destinations,
         maximumEntries, maximumNumberOfMinutes) {
-        // console.log("NJ Transit createFetcher()");
         const self = this;
 
         let njtFetcher;

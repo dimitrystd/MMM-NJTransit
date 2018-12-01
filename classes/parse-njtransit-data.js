@@ -54,7 +54,6 @@ const parseNjtData = async (xml) => {
         } else {
             events.push(parseBusData(xmlObj.stop.pre));
         }
-        console.info(events);
         return events;
     } catch (e) {
         return [new ErrorEventData(`Could not parse XML from string "${xml}"`)];
