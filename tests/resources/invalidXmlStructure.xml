@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<stop>
+    <test>
+        <pt>19</pt>
+        <pu> MINUTES</pu>
+        <mode>1</mode>
+        <consist></consist>
+        <cars></cars>
+        <fd> 158 NEW YORK  VIA RIVER ROAD</fd>
+        <scheduled>false</scheduled>
+        <nextbusminutes>0</nextbusminutes>
+        <nextbusonroutetime>4:33 PM</nextbusonroutetime>
+        <v>9625</v>
+        <rn>158</rn>
+        <rd>158</rd>
+        <zone></zone>
+    </test>
+</stop>

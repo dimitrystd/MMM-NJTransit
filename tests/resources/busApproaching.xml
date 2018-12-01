@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+
+<stop>
+
+
+    <pre>
+
+        <pt><![CDATA[&nbsp;]]></pt>
+        <pu>APPROACHING</pu>
+
+
+        <mode>1</mode>
+        <consist></consist>
+        <cars></cars>
+        <fd> 27B BLOOMFIELD  VIA BROAD ST STA</fd>
+        <zone></zone>
+
+
+        <scheduled>false</scheduled>
+        <nextbusminutes>0</nextbusminutes>
+        <nextbusonroutetime>12:53 PM</nextbusonroutetime>
+        <v>5833</v>
+
+
+        <rn>27</rn>
+        <rd>27</rd>
+    </pre>
+
+</stop>
