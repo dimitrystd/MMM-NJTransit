@@ -1,6 +1,29 @@
 {
   "name": "MMM-NJTransit",
   "version": "1.0.0",
+  "description": "A MagicMirror module to show NJ Transit bus arrival times.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dimitrystd/MMM-NJTransit.git"
+  },
+  "keywords": [
+    "mmm",
+    "public transport",
+    "magic mirror",
+    "smart mirror",
+    "nj transit bus",
+    "module"
+  ],
+  "author": {
+    "name": "Dmitry Studynskyi",
+    "email": "dimitrystd@gmail.com"
+  },
+  "contributors": "https://github.com/dimitrystd/MMM-NJTransit/graphs/contributors",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/galaktor/MMM-NJTransit/issues"
+  },
+  "homepage": "http://github.com/dimitrystd/MMM-NJTransit",
   "scripts": {
     "start": "node %NODE_DEBUG_OPTION% MMM-NJTransit.js",
     "pretest": "eslint .",
@@ -28,7 +51,8 @@
     "fs": "0.0.1-security",
     "mocha": "^5.2.0",
     "mocha-junit-reporter": "^1.18.0",
-    "nyc": "^13.0.1"
+    "nyc": "^13.0.1",
+    "sinon": "^7.1.1"
   },
   "nyc": {
     "reporter": [
