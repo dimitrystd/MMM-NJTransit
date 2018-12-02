@@ -57,6 +57,14 @@ Module.register("MMM-NJTransit", {
         this.loaded = false;
     },
 
+    suspend() {
+        this.sendSocketNotification("SUSPEND_NJT_FETCHERS", {});
+    },
+
+    resume() {
+        this.sendSocketNotification("RESUME_NJT_FETCHERS", {});
+    },
+
     /* handle notifications */
     socketNotificationReceived (notification, payload) {
         if (notification === "NJT_EVENTS") {

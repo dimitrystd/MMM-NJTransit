@@ -21,6 +21,18 @@ module.exports = nodeHelper.create({
                 payload.destinations,
                 payload.maximumEntries,
                 payload.maximumNumberOfMinutes);
+        } else if (notification === "SUSPEND_NJT_FETCHERS") {
+            for (const stopId in this.fetchers) {
+                const fetcher = this.fetchers[stopId];
+                console.log(`Suspending fetching stopId=${stopId}`);
+                fetcher.stopFetch();
+            }
+        } else if (notification === "RESUME_NJT_FETCHERS") {
+            for (const stopId in this.fetchers) {
+                const fetcher = this.fetchers[stopId];
+                console.log(`Resuming fetching stopId=${stopId}`);
+                fetcher.startFetch();
+            }
         }
     },
 

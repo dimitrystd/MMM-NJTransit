@@ -90,6 +90,12 @@ class NjtFetcher {
         this.fetchStop();
     }
 
+    /* stop time and calling fetchStop() */
+    stopFetch() {
+        clearTimeout(this.reloadTimer);
+        this.reloadTimer = null;
+    }
+
     /* Broadcast the existing events */
     broadcastEvents() {
         // console.log('Broadcasting ' + events.length + ' events.');
@@ -115,8 +121,7 @@ class NjtFetcher {
 
     /* fetches the data from RTPI API */
     async fetchStop() {
-        clearTimeout(this.reloadTimer);
-        this.reloadTimer = null;
+        this.stopFetch();
 
         const apiUrl = `http://mybusnow.njtransit.com/bustime/eta/getStopPredictionsETA.jsp?route=all&stop=${this.stopId}`;
         await request(apiUrl)
