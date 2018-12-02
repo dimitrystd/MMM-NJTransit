@@ -2,6 +2,8 @@
  * Copyright (C) 2018 Dmitry Studynskyi
  * License: GNU General Public License */
 
+/* eslint-disable guard-for-in,no-restricted-syntax,no-console */
+// eslint-disable-next-line import/no-unresolved
 const nodeHelper = require("node_helper");
 const NjtFetcher = require("./classes/fetch-njtransit-data");
 

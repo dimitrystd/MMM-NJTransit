@@ -2,7 +2,7 @@
 * Copyright (C) 2018 Dmitry Studynskyi
 * License: GNU General Public License */
 
-/* eslint-disable guard-for-in,no-restricted-syntax */
+/* eslint-disable guard-for-in,no-restricted-syntax,no-console */
 /* eslint no-plusplus: ["error", { "allowForLoopAfterthoughts": true }] */
 const request = require("request-promise-native");
 const njtParser = require("./parse-njtransit-data");
@@ -119,7 +119,7 @@ class NjtFetcher {
         this.fetchFailedCallback = callback;
     }
 
-    /* fetches the data from RTPI API */
+    /* fetches the data from NJ Transit API */
     async fetchStop() {
         this.stopFetch();
 
@@ -161,7 +161,7 @@ class NjtFetcher {
                 this.scheduleTimer();
             }).catch((err) => {
                 /* handle HTTP errors */
-                console.error(`NJ Transit error querying RTPI API for stop id: ${this.stopId}`);
+                console.error(`NJ Transit error querying NJ Transit API for stop id: ${this.stopId}`);
                 console.error(err);
                 this.fetchFailedCallback(this, err);
                 this.scheduleTimer();
