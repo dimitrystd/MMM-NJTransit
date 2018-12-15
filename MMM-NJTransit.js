@@ -147,7 +147,7 @@ Module.register("MMM-NJTransit", {
 
             const timeWrapper = document.createElement("td");
             timeWrapper.innerText = event.isDue ? "Approaching" : `${event.dueTime} min`;
-            timeWrapper.className = "time light";
+            timeWrapper.className = "time medium regular bright";
             eventWrapper.appendChild(timeWrapper);
 
             wrapper.appendChild(eventWrapper);

@@ -6,7 +6,7 @@
     padding-left: 0;
     padding-right: 10px;
     font-size: 80%;
-    vertical-align: top;
+    vertical-align: middle;
 }
 
 .symbol span {
@@ -18,10 +18,11 @@
 
 .route, .stopname, .destination {
     padding: 0px 10px;
+    vertical-align: middle;
 }
 
 .time {
     padding-left: 30px;
     text-align: right;
-    vertical-align: top;
+    vertical-align: middle;
 }
